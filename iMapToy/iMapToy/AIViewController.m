@@ -14,25 +14,24 @@
 
 @interface AIViewController ()
 
-- (void)addMarker:(CLLocationCoordinate2D)coordinate;
-- (void)changeSwitch:(id)sender;
-- (void)buttonPressed:(id)sender;
+- (void)addMarker:(CLLocationCoordinate2D)coordinate
+      isAvailable:(BOOL)isAvailable;
 
 @end
 
 @implementation AIViewController
 
 GMSMapView *mapView;
-UIImage *flag_red;
-UIImage *flag_green;
+UIImage *flagRed;
+UIImage *flagGreen;
 
-#pragma mark View lifecycle
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    flag_red = [UIImage imageNamed:@"flag_red"];
-    flag_green = [UIImage imageNamed:@"flag_green"];
+    flagRed = [UIImage imageNamed:@"flag_red"];
+    flagGreen = [UIImage imageNamed:@"flag_green"];
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:49.26123
                                                             longitude:-123.11393
@@ -52,26 +51,14 @@ UIImage *flag_green;
         isAvailable:NO];
 }
 
-#pragma mark Private methods
+#pragma mark - Private methods
 
 - (void)addMarker:(CLLocationCoordinate2D)coordinate
       isAvailable:(BOOL)isAvailable {
     GMSMarker *marker = [GMSMarker markerWithPosition:coordinate];
     marker.title = @"Residential";
-    if (isAvailable) {
-        marker.icon = flag_green;
-    } else {
-        marker.icon = flag_red;
-    }
+    marker.icon = isAvailable ? flagGreen : flagRed;
     marker.map = mapView;
-}
-
-- (void)changeSwitch:(id)sender {
-    NSLog(@"change switch!");
-}
-
-- (void)buttonPressed:(id)sender {
-    NSLog(@"button pressed!");
 }
 
 #pragma mark - GMSMapViewDelegate
@@ -98,11 +85,8 @@ UIImage *flag_green;
     [sheet addButtonWithTitle:@"Toggle free status"
                       atIndex:0
                         block:^{
-                            if ($eql(marker.icon, flag_red)) {
-                                marker.icon = flag_green;
-                            } else {
-                                marker.icon = flag_red;
-                            }
+                            marker.icon = $eql(marker.icon, flagRed) ?
+                                flagGreen : flagRed;
     }];
     [sheet showInView:self.view];
     return YES;
