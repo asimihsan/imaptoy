@@ -27,9 +27,9 @@ UIImage *flagGreen;
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
+- (void)loadView
 {
-    [super viewDidLoad];
+    [super loadView];
     flagRed = [UIImage imageNamed:@"flag_red"];
     flagGreen = [UIImage imageNamed:@"flag_green"];
     
