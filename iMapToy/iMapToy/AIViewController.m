@@ -15,8 +15,6 @@
 @interface AIViewController ()
 
 - (void)addMarker:(CLLocationCoordinate2D)coordinate;
-- (void)showNotification:(CLLocationCoordinate2D)coordinate
-                   title:(NSString *)title;
 - (void)changeSwitch:(id)sender;
 - (void)buttonPressed:(id)sender;
 
@@ -68,18 +66,6 @@ UIImage *flag_green;
     marker.map = mapView;
 }
 
-- (void)showNotification:(CLLocationCoordinate2D)coordinate
-                   title:(NSString *)title {
-    NSString *message = [NSString stringWithFormat:@"At %f,%f",
-                         coordinate.latitude,
-                         coordinate.longitude];
-    [TSMessage showNotificationInViewController:self
-                                      withTitle:title
-                                    withMessage:message
-                                       withType:TSMessageNotificationTypeMessage
-                                   withDuration:3.0];
-}
-
 - (void)changeSwitch:(id)sender {
     NSLog(@"change switch!");
 }
@@ -91,7 +77,14 @@ UIImage *flag_green;
 #pragma mark - GMSMapViewDelegate
 
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate {
-    [self showNotification:coordinate title:@"Long press"];
+    NSString *message = [NSString stringWithFormat:@"At %f,%f",
+                         coordinate.latitude,
+                         coordinate.longitude];
+    [TSMessage showNotificationInViewController:self
+                                      withTitle:@"Added a spot"
+                                    withMessage:message
+                                       withType:TSMessageNotificationTypeSuccess
+                                   withDuration:2.0];
     [self addMarker:coordinate
         isAvailable:NO];
 }
