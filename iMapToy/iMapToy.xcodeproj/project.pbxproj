@@ -315,6 +315,7 @@
 				GCC_PREFIX_HEADER = "iMapToy/iMapToy-Prefix.pch";
 				INFOPLIST_FILE = "iMapToy/iMapToy-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -327,6 +328,7 @@
 				GCC_PREFIX_HEADER = "iMapToy/iMapToy-Prefix.pch";
 				INFOPLIST_FILE = "iMapToy/iMapToy-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
